@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#This is a script to extract the column and row data from GALT textfiles for easy input into an excel file
+for a in PL* ; do grep '<Row' $a > ${a%.txt}-rs.txt ; done
+for b in PL* ; do grep '<Column' $b > ${b%.txt}-cs.txt ; done
+for c in *rs.txt ; do cut -c 10- $c > ${c%s.txt}i.txt ; done
+rm *rs.txt
+for d in *cs.txt ; do cut -c 13- $d > ${d%s.txt}i.txt ; done
+rm *cs.txt
+for e in *ri.txt ; do cut -d '<' -f 1 $e > ${e%i.txt}f.txt ; done
+rm *ri.txt
+for f in *ci.txt ; do cut -d '<' -f 1 $f > ${f%i.txt}f.txt ; done
+rm *ci.txt
+mkdir pectin_picklists
+for g in *rf.txt ; do mv $g ~/Desktop/Carini_Lab/IAV002/IAV002-09/pectin_picklists/$g ; done
+for h in *cf.txt ; do mv $h ~/Desktop/Carini_Lab/IAV002/IAV002-09/pectin_picklists/$h ; done
+rm ~/Desktop/Carini_Lab/IAV002/IAV002-09/pectin_picklists/*rs-cf.txt
+cd pectin_picklists
+for i in * ; do echo $i & cat $i ; done
